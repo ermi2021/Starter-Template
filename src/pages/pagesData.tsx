@@ -11,7 +11,7 @@ const pagesData: routerType[] = [
   {
     path: "signup",
     element: <SignUp />,
-    title: "about"
+    title: "signup"
   },
   {
     path: "home",
