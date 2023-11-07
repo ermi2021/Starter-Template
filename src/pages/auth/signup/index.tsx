@@ -160,7 +160,7 @@ const SignUp = () => {
             variant={"solid"}
             fontSize={12}
           >
-            LOGIN
+          Sign Up
           </Button>
         </Stack>
         <Divider orientation="horizontal" marginY={2} size={"lg"} />
