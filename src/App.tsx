@@ -1,12 +1,16 @@
 import React from "react";
-import Login from "./pages/auth/login";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./pages/router";
 import { ChakraProvider } from "@chakra-ui/react";
+
 
 function App() {
   return (
+    <BrowserRouter>
     <ChakraProvider>
-      <Login />
+      <Router />
     </ChakraProvider>
+    </BrowserRouter>
   );
 }
 
