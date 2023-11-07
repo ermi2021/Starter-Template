@@ -1,6 +1,5 @@
 import {
     Box,
-    AbsoluteCenter,
     Stack,
     Input,
     Text,
@@ -11,6 +10,7 @@ import {
     Spacer,
     InputGroup,
     InputRightElement,
+    Flex,
   } from "@chakra-ui/react";
   
   import { useFormik } from "formik";
@@ -44,8 +44,7 @@ import {
       },
     });
     return (
-      <Box bg={"#f1f1f1"} width="100%" height="100vh" overflow={"hidden"}>
-        <AbsoluteCenter>
+      <Flex px={{base:5}} alignContent={'center'} justifyContent={'center'} alignItems={'center'} bg={"#f1f1f1"} width="100%" height="100vh" overflow={"hidden"}>
           <Box
             bg={"white"}
             p={7}
@@ -127,14 +126,15 @@ import {
               <Spacer />
               <Center>
                 <HStack>
-                  <Text fontSize={14} fontWeight={"normal"}>
+                  <Text  fontSize={{base:12, sm:12, md:14, lg:14, xl:14}} fontWeight={"normal"} m={0}>
                     Didn't have an account?
                   </Text>
                   <Button
                     colorScheme={"facebook"}
                     variant={"link"}
-                    fontSize={14}
+                    fontSize={{base:12, sm:12, md:14, lg:14, xl:14}}
                     fontWeight={"normal"}
+                    m={0}
                   >
                     Sign up
                   </Button>
@@ -142,8 +142,7 @@ import {
               </Center>
             </Stack>
           </Box>
-        </AbsoluteCenter>
-      </Box>
+      </Flex>
     );
   };
   
