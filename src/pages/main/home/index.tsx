@@ -1,11 +1,9 @@
 import {
     Avatar,
     Box,
-    Button,
     Icon,
     Center,
     CloseButton,
-    Divider,
     Flex,
     BoxProps,
     Drawer,
@@ -21,9 +19,7 @@ import {
     Spacer,
     useColorModeValue,
     useDisclosure,
-    Stack,
     Text,
-    WrapItem,
     FlexProps,
     Hide,
     VStack,
@@ -32,7 +28,6 @@ import {
   import { ReactText } from "react";
   import {useNavigate} from 'react-router-dom';
   import {
-    FiBell,
     FiChevronDown,
     FiCompass,
     FiHome,
