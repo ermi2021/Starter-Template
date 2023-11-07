@@ -51,10 +51,7 @@ import {
     { name: "Menu 5", icon: FiSettings },
   ];
   
-  const menuItems: Array<LinkItemProps> = [
-    { name: "MENU 1", icon: FiHome },
-    { name: "MENU 2", icon: FiTrendingUp },
-  ];
+
   
   interface NavItemProps extends FlexProps {
     icon: IconType;
