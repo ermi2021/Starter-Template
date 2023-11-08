@@ -17,21 +17,24 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import phoneRegExp from "../../../utils/validation/phonenumber";
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasword, setShowPassword] = useState(false);
   const [showNewPasword, setShowNewPassword] = useState(false);
+  const [showPasswordConfirmationError, setShowPasswordConfirmationError] =
+    useState(false);
   const navigate = useNavigate();
   const SignUpSchema = yup.object().shape({
-    email: yup.string().email().required(),
+    phoneNumber: yup.string().matches(phoneRegExp, "Phone number is not valid"),
     username: yup.string().required(),
     password: yup.string().required("password is required"),
     confirmpassword: yup.string().required(),
   });
   const formik = useFormik({
     initialValues: {
-      email: "",
+      phoneNumber: "",
       username: "",
       password: "",
       confirmpassword: "",
@@ -41,7 +44,12 @@ const SignUp = () => {
       setIsLoading(true);
       setTimeout(() => {
         if (formik.isValid) {
-          navigate("/home");
+          if (values.password === values.confirmpassword) {
+            navigate("/home");
+          } else {
+            setShowPasswordConfirmationError(true);
+            setIsLoading(false);
+          }
         } else {
           setIsLoading(false);
         }
@@ -81,16 +89,31 @@ const SignUp = () => {
               Please fill the following information to register.
             </Text>
           </Box>
+          {showPasswordConfirmationError && (
+            <Text
+              fontSize={"sm"}
+              fontWeight={"bold"}
+              border={"1px"}
+              borderRadius={"md"}
+              p={"2"}
+              borderColor={"red.400"}
+              color={"red.400"}
+              textAlign={"left"}
+            >
+              Password didn't match
+            </Text>
+          )}
+
           <Input
-            isInvalid={formik.errors.email ? true : false}
+            isInvalid={formik.errors.phoneNumber ? true : false}
             errorBorderColor="red.200"
             borderWidth={"thin"}
             focusBorderColor="gray.300"
             borderColor={"gray.400"}
             name="username"
-            placeholder="Email Address"
+            placeholder="Phone Number"
             size="md"
-            onChange={formik.handleChange("email")}
+            onChange={formik.handleChange("phoneNumber")}
           />
           <Input
             isInvalid={formik.errors.username ? true : false}
@@ -111,7 +134,7 @@ const SignUp = () => {
               errorBorderColor="red.200"
               focusBorderColor="gray.300"
               borderColor={"gray.400"}
-              type={showPasword ? "text" : "password"}
+              type={showNewPasword ? "text" : "password"}
               placeholder="Enter New Password"
               onChange={formik.handleChange("password")}
             />
@@ -160,7 +183,7 @@ const SignUp = () => {
             variant={"solid"}
             fontSize={12}
           >
-          Sign Up
+            Sign Up
           </Button>
         </Stack>
         <Divider orientation="horizontal" marginY={2} size={"lg"} />
