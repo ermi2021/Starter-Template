@@ -12,6 +12,9 @@ import {
   Text,
   Hide,
   Show,
+  Divider,
+  Stack,
+  Button,
 } from "@chakra-ui/react";
 import UserNavigationDropDown from "../../../components/user/navDropdown";
 import SidebarContent from "../../../components/sidebar";
@@ -88,11 +91,52 @@ const Profile = () => {
               sm: "5",
             }}
           >
-            <Box></Box>
+            <Center>
+              <Box
+                m={10}
+                p={10}
+               
+                w={"50%"}
+                bg={"white"}
+                boxShadow={"lg"}
+                borderRadius={"lg"}
+              >
+                <Box>
+                  <Text size={"lg"} fontSize={"lg"}>
+                    Account Details
+                  </Text>
+                  <Divider />
+                </Box>
+
+                <HStack spacing={4} m={4}  direction="row" align="center">
+                  <Text fontWeight={'normal'}>current username</Text>
+                  <Spacer/>
+                  <Button colorScheme="teal" size="sm" variant={"outline"} color={'green.400'}>
+                    update
+                  </Button>
+                </HStack>
+                <Divider />
+                <HStack spacing={4} m={4}  direction="row" align="center">
+                  <Text fontWeight={'normal'}>current username</Text>
+                  <Spacer/>
+                  <Button colorScheme="teal" size="sm" variant={"outline"} color={'green.400'}>
+                    update
+                  </Button>
+                </HStack>
+                <Divider />
+                <HStack spacing={4} m={4}  direction="row" align="center">
+                  <Text fontWeight={'normal'}>current username</Text>
+                  <Spacer/>
+                  <Button colorScheme="teal" size="sm" variant={"outline"} color={'green.400'}>
+                    update
+                  </Button>
+                </HStack>
+              </Box>
+            </Center>
           </GridItem>
-          <GridItem  area={"footer"}>
-            <Show breakpoint='(max-width: 767px)' >
-            <MobileNav onOpen={onOpen} />
+          <GridItem area={"footer"}>
+            <Show breakpoint="(max-width: 767px)">
+              <MobileNav onOpen={onOpen} />
             </Show>
           </GridItem>
         </Grid>

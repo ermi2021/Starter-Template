@@ -13,30 +13,57 @@ import {
   Hide,
   Show,
   Input,
+  Stack,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import UserNavigationDropDown from "../../../components/user/navDropdown";
 import SidebarContent from "../../../components/sidebar";
 import MobileNav from "../../../components/sidebar/onmobile";
 import { FiAnchor, FiMessageCircle } from "react-icons/fi";
+import Login from "../../auth/login";
+import { useState } from "react";
+import SignUp from "../../auth/signup";
 
 const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [registerClicked, setRegisterClicked] = useState(false);
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
-        onClose={() => onClose}
+        onClose={() => {}}
         display={{ base: "none", md: "block" }}
       />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>{registerClicked ?  <SignUp /> :  <Login />}</ModalBody>
+
+          <ModalFooter>
+            {/* <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant='ghost'>Secondary Action</Button> */}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Drawer
-        isOpen={isOpen}
+        isOpen={false}
         placement="left"
-        onClose={onClose}
+        onClose={() => {}}
         returnFocusOnClose={false}
-        onOverlayClick={onClose}
+        onOverlayClick={() => {}}
         size="full"
       >
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent onClose={() => {}} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
@@ -81,8 +108,8 @@ const Home = () => {
             flexDirection={"column"}
             h={"80px"}
             area={"header"}
-            position={'sticky'}
-            top={'0'}
+            position={"sticky"}
+            top={"0"}
             boxShadow={"sm"}
           >
             <HStack px={5}>
@@ -104,6 +131,31 @@ const Home = () => {
                 />
               </Hide>
 
+              <Stack spacing={4} direction="row" align="center">
+                <Button
+                  variant={"link"}
+                  textDecoration={"none"}
+                  colorScheme="teal"
+                  size="sm"
+                  onClick={() => {
+                    setRegisterClicked(false);
+                    onOpen();
+                  }}
+                >
+                  Sign In
+                </Button>
+                <Button
+                  color={"white"}
+                  bgColor="#1475e1"
+                  size="sm"
+                  onClick={() => {
+                    setRegisterClicked(true);
+                    onOpen();
+                  }}
+                >
+                  Register
+                </Button>
+              </Stack>
               <UserNavigationDropDown />
               <FiAnchor />
             </HStack>

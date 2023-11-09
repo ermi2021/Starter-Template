@@ -44,16 +44,6 @@ const Login = () => {
     },
   });
   return (
-    <Flex
-      px={{ base: 5 }}
-      alignContent={"center"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      bg={"#f1f1f1"}
-      width="100%"
-      height="100vh"
-      overflow={"hidden"}
-    >
       <Box
         bg={"white"}
         p={7}
@@ -124,10 +114,10 @@ const Login = () => {
         <Divider orientation="horizontal" marginY={2} size={"lg"} />
         <Stack spacing={"auto"} paddingX={3}>
           <Button
-            colorScheme={"facebook"}
+            color={"teal.500"}
             variant={"link"}
-            fontSize={14}
-            fontWeight={"normal"}
+            fontSize={13}
+            fontWeight={"bold"}
           >
             Forgot Password?
           </Button>
@@ -136,16 +126,18 @@ const Login = () => {
             <HStack>
               <Text
                 fontSize={{ base: 12, sm: 12, md: 14, lg: 14, xl: 14 }}
-                fontWeight={"normal"}
+                fontWeight={"bold"}
                 m={0}
+                color={"teal.500"}
               >
                 Didn't have an account?
               </Text>
               <Button
-                colorScheme={"facebook"}
+                 color={"black"}
+                
                 variant={"link"}
-                fontSize={{ base: 12, sm: 12, md: 14, lg: 14, xl: 14 }}
-                fontWeight={"normal"}
+                fontSize={{ base: 12, sm: 12, md: 13, lg: 13, xl: 13 }}
+                fontWeight={"bold"}
                 m={0}
                 onClick={()=>{navigate('/signup')}}
               >
@@ -154,8 +146,7 @@ const Login = () => {
             </HStack>
           </Center>
         </Stack>
-      </Box>
-    </Flex>
+      </Box>  
   );
 };
 
