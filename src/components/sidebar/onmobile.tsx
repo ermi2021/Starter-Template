@@ -1,32 +1,40 @@
-import { Flex, FlexProps, IconButton, Text } from "@chakra-ui/react";
-import { FiMenu } from "react-icons/fi";
-
+import { FlexProps } from "@chakra-ui/react";
+import {
+  BottomNavigation,
+  BottomNavigationIcon,
+  BottomNavigationItem,
+  BottomNavigationLabel,
+} from "chakra-ui-bottom-navigation";
+import LinkItems from "../../utils/data/sidebar/menuitems";
+import { useState } from "react";
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const [index,setIndex] = useState(0);
   return (
-    <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 24 }}
-      height="20"
-      alignItems="center"
-      borderBottomWidth="1px"
-      justifyContent="flex-start"
-      {...rest}
+    <BottomNavigation
+      value={index}
+      onChange={(newIndex:number) => {
+        setIndex(newIndex);
+      }}
+     p={2}
+      bgColor={'teal.300'}
+      variant="float"
+      showLabel="if-active"
+      display={'flex'}
+      flexDirection='row'
+      alignItems='center'
+      justifyContent='space-between'
     >
-      <IconButton
-        variant="outline"
-        onClick={onOpen}
-        aria-label="open menu"
-        icon={<FiMenu />}
-      />
-
-      <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
-      </Text>
-    </Flex>
+      {LinkItems.map((menu) => (
+        <BottomNavigationItem>
+          <BottomNavigationIcon as={menu.icon} />
+          <BottomNavigationLabel fontSize={'sm'} fontWeight={'bold'}>{menu.name}</BottomNavigationLabel>
+        </BottomNavigationItem>
+      ))}
+    </BottomNavigation>
   );
 };
 
