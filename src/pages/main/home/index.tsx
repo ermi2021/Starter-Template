@@ -18,7 +18,6 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalCloseButton,
   ModalBody,
   ModalFooter,
@@ -26,7 +25,7 @@ import {
 import UserNavigationDropDown from "../../../components/user/navDropdown";
 import SidebarContent from "../../../components/sidebar";
 import MobileNav from "../../../components/sidebar/onmobile";
-import { FiAnchor, FiMessageCircle } from "react-icons/fi";
+import { FiAnchor } from "react-icons/fi";
 import Login from "../../auth/login";
 import { useState } from "react";
 import SignUp from "../../auth/signup";
