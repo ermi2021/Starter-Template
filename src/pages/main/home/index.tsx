@@ -38,7 +38,7 @@ const Home = () => {
         onClose={() => {}}
         display={{ base: "none", md: "block" }}
       />
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
