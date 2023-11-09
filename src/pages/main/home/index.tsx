@@ -11,10 +11,13 @@ import {
   useDisclosure,
   Text,
   Hide,
+  Show,
+  Input,
 } from "@chakra-ui/react";
 import UserNavigationDropDown from "../../../components/user/navDropdown";
 import SidebarContent from "../../../components/sidebar";
 import MobileNav from "../../../components/sidebar/onmobile";
+import { FiAnchor, FiMessageCircle } from "react-icons/fi";
 
 const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,20 +40,20 @@ const Home = () => {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
+
       <Box ml={{ base: 0, md: 60 }}>
         <Grid
           templateAreas={{
-            base: '"main" "footer"',
-            sm: `"main" "footer"`,
+            base: '"header" "main" "footer"',
+            sm: `"header" "main" "footer"`, // Add header to "main" for sm
             md: `"header" "main" "footer"`,
             lg: '"header" "main" "footer"',
             xl: '"header" "main" "footer"',
             "2xl": '"header" "main" "footer"',
           }}
           gridTemplateRows={{
-            base: "1fr 30px",
-            sm: "1fr 30px",
+            base: "80px 1fr 30px",
+            sm: "80px 1fr 30px", // Adjust row height for header in sm
             md: "80px 1fr 30px",
             lg: "80px 1fr 30px",
             xl: "80px 1fr 30px",
@@ -69,14 +72,43 @@ const Home = () => {
           fontWeight="bold"
           rowGap={5}
         >
-          <Hide below="md">
-            <GridItem bg="white" w={"100%"} area={"header"}>
-              <HStack alignSelf={"center"} h={"100%"} px={10}>
-                <Spacer />
-                <UserNavigationDropDown />
-              </HStack>
-            </GridItem>
-          </Hide>
+          {/* <Hide below="md"> */}
+          <GridItem
+            bg="white"
+            display={"flex"}
+            justifyContent={"center"}
+            gap={"20"}
+            flexDirection={"column"}
+            h={"80px"}
+            area={"header"}
+            position={'sticky'}
+            top={'0'}
+            boxShadow={"sm"}
+          >
+            <HStack px={5}>
+              <Show breakpoint="(max-width: 767px)">
+                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+                  Logo
+                </Text>
+              </Show>
+
+              <Spacer />
+              <Hide breakpoint="(max-width: 767px)">
+                <Input
+                  placeholder="Search"
+                  m={5}
+                  size={"md"}
+                  width={"30%"}
+                  borderColor={"gray.300"}
+                  focusBorderColor={"gray.400"}
+                />
+              </Hide>
+
+              <UserNavigationDropDown />
+              <FiAnchor />
+            </HStack>
+          </GridItem>
+          {/* </Hide> */}
 
           <GridItem
             px="5"
@@ -94,46 +126,68 @@ const Home = () => {
                 lg: "repeat(2,1fr)",
                 xl: "repeat(3,1fr)",
               }}
-              h="100%"
+              minH="100%"
               w={"100%"}
               gap={4}
             >
               <GridItem
                 rowSpan={2}
-                bg="teal.200"
+                bg="gray.300"
+                h={300}
                 borderRadius={"lg"}
               ></GridItem>
               <GridItem
                 rowSpan={2}
-                bg="teal.200"
+                h={300}
+                bg="gray.300"
                 borderRadius={"lg"}
               ></GridItem>
               <GridItem
                 rowSpan={2}
-                bg="teal.200"
+                h={300}
+                bg="gray.300"
                 borderRadius={"lg"}
               ></GridItem>
               <GridItem
                 rowSpan={2}
-                bg="teal.200"
+                h={300}
+                bg="gray.300"
                 borderRadius={"lg"}
               ></GridItem>
               <GridItem
                 rowSpan={2}
-                bg="teal.200"
+                h={300}
+                bg="gray.300"
                 borderRadius={"lg"}
               ></GridItem>
               <GridItem
                 rowSpan={2}
-                bg="teal.200"
+                h={300}
+                bg="gray.300"
+                borderRadius={"lg"}
+              ></GridItem>
+              <GridItem
+                rowSpan={2}
+                h={300}
+                bg="gray.300"
+                borderRadius={"lg"}
+              ></GridItem>
+              <GridItem
+                rowSpan={2}
+                bg="gray.300"
+                borderRadius={"lg"}
+              ></GridItem>
+              <GridItem
+                rowSpan={2}
+                bg="gray.300"
                 borderRadius={"lg"}
               ></GridItem>
             </Grid>
           </GridItem>
-          <GridItem pl="2" area={"footer"}>
-            <Center>
-              <Text>Footer</Text>
-            </Center>
+          <GridItem area={"footer"} position={"sticky"} bottom={"0"}>
+            <Show breakpoint="(max-width: 767px)">
+              <MobileNav onOpen={onOpen} />
+            </Show>
           </GridItem>
         </Grid>
       </Box>
