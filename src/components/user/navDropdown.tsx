@@ -1,6 +1,4 @@
 import {
-  Avatar,
-  Box,
   Flex,
   HStack,
   Menu,
@@ -8,11 +6,8 @@ import {
   MenuItem,
   MenuList,
   useColorModeValue,
-  Text,
-  VStack,
-  MenuDivider,
 } from "@chakra-ui/react";
-import { FiChevronDown, FiUser } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 const UserNavigationDropDown = () => {
