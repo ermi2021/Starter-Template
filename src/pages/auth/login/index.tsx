@@ -10,7 +10,6 @@ import {
   Spacer,
   InputGroup,
   InputRightElement,
-  Flex,
 } from "@chakra-ui/react";
 
 import { useFormik } from "formik";
