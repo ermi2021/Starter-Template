@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import axiosInstance from './interceptor';
 const API_BASE_URL = 'https://bs.mehal.com.et/api';
 
 export const login = async (username: string, password: string) => {
@@ -20,24 +20,25 @@ export const login = async (username: string, password: string) => {
 };
 
 export const logout = async () => {
-    const response = await axios.post(`${API_BASE_URL}/logout`);
-    if (response.status === 200) {
+    try {
+    const response = await axiosInstance.post(`${API_BASE_URL}/logout`);
         // remove token and key from local storage
         localStorage.removeItem('token');
         localStorage.removeItem('key');
     }
-
-    return response.data;
+    catch (ex) {
+        console.log(ex);
+    }
 };
 
 export const forgotPassword = async (email: string) => {
-    const response = await axios.post(`${API_BASE_URL}/forgot-password`, { email });
+    const response = await axiosInstance.post(`${API_BASE_URL}/forgot-password`, { email });
     return response.data;
 };
 
 export const signup = async (email: string, password: string, phoneNumber: string) => {
     try {
-    const response = await axios.post(`${API_BASE_URL}/signup`, { email, password, phoneNumber });
+    const response = await axiosInstance.post(`${API_BASE_URL}/signup`, { email, password, phoneNumber });
     return response.status === 200 ? true : false;
     } catch (ex) {
         return false;

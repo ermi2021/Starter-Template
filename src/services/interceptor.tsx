@@ -5,11 +5,18 @@ const API_BASE_URL = 'https://bs.mehal.com.et/api';
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
 });
-
 axiosInstance.interceptors.request.use((config) => {
+  console.log('intersecptor');
   // Global request interceptor logic
-      // add header bearer token here
-      config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+  // add header bearer token here
+  config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+
+  // add key-value pairs stored in local storage as params to every API request
+  const params = localStorage.getItem('key');
+  if (params) {
+    config.params = { ...config.params, ...{key: params} };
+  }
+
   return config;
 });
 
