@@ -3,6 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = 'https://bs.mehal.com.et/api';
 
 export const login = async (username: string, password: string) => {
+    try {
     const response = await axios.post(`${API_BASE_URL}/login`, { username, password });
     if (response.status === 200) {
         // save token and key to local storage
@@ -13,7 +14,9 @@ export const login = async (username: string, password: string) => {
     else {
         return false
     }
-
+}catch (ex) {
+    return false
+}
 };
 
 export const logout = async () => {
@@ -32,7 +35,11 @@ export const forgotPassword = async (email: string) => {
     return response.data;
 };
 
-export const signup = async (email: string, password: string, name: string) => {
-    const response = await axios.post(`${API_BASE_URL}/signup`, { email, password, name });
-    return response.data;
+export const signup = async (email: string, password: string, phoneNumber: string) => {
+    try {
+    const response = await axios.post(`${API_BASE_URL}/signup`, { email, password, phoneNumber });
+    return response.status === 200 ? true : false;
+    } catch (ex) {
+        return false;
+    }
 };
