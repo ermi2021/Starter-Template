@@ -16,10 +16,16 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import {login} from "../../../services/userServices"
+import DialogBox from "../../../components/dialogbox/index"
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasword, setShowPassword] = useState(false);
+  const [showDialogBox, setShowDialogBox] = useState(false);
+  const [dialogBoxMessage, setDialogBoxMessage] = useState("Login successful");
+
+
   const navigate = useNavigate();
   const LoginSchema = yup.object().shape({
     username: yup.string().required(),
@@ -33,13 +39,20 @@ const Login = () => {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       setIsLoading(true);
-      setTimeout(() => {
-        if (formik.isValid) {
-          navigate("/home");
-        } else {
-          setIsLoading(false);
+      login(values.username, values.password).then((res)=>{
+        if (res) {
+          setShowDialogBox(true);
+          setIsLoading(false)
+          setTimeout(() => {
+            window.location.reload()
+          }, 3000);
         }
-      }, 2000);
+        else {
+          setDialogBoxMessage("Invalid credentials");
+          setShowDialogBox(true);
+          setIsLoading(false)
+        }
+      })
     },
   });
   return (
@@ -145,6 +158,14 @@ const Login = () => {
             </HStack>
           </Center>
         </Stack>
+        <DialogBox
+          active={showDialogBox}
+          message={dialogBoxMessage}
+          okayButtonText={"Okay"}
+          onOkay={() => {
+            setShowDialogBox(false);
+            navigate("/");
+          }}></DialogBox>
       </Box>  
   );
 };
