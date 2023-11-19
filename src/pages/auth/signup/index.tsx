@@ -17,6 +17,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import phoneRegExp from "../../../utils/validation/phonenumber";
+import { signup } from "../../../services/userServices";
+import DialogBox from "../../../components/dialogbox/index"
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +26,9 @@ const SignUp = () => {
   const [showNewPasword, setShowNewPassword] = useState(false);
   const [showPasswordConfirmationError, setShowPasswordConfirmationError] =
     useState(false);
+  const [showDialogBox, setShowDialogBox] = useState(false);
+  const [dialogBoxMessage, setDialogBoxMessage] = useState("Signup successful");
+
   const navigate = useNavigate();
   const SignUpSchema = yup.object().shape({
     phoneNumber: yup.string().matches(phoneRegExp, "Phone number is not valid"),
@@ -44,6 +49,17 @@ const SignUp = () => {
       setTimeout(() => {
         if (formik.isValid) {
           if (values.password === values.confirmpassword) {
+            signup(values.username, values.password, values.phoneNumber).then(val => {
+              if (val) {
+                setShowDialogBox(true);
+                setIsLoading(false);
+              }
+              else {
+                setShowDialogBox(true)
+                setDialogBoxMessage("Something went wrong");
+                setIsLoading(false);
+              }
+            })
             navigate("/home");
           } else {
             setShowPasswordConfirmationError(true);
@@ -60,7 +76,7 @@ const SignUp = () => {
       bg={"transparent"}
       p={7}
       borderRadius={"lg"}
-      
+
     >
       <Divider
         orientation="horizontal"
@@ -201,6 +217,14 @@ const SignUp = () => {
           </HStack>
         </Center>
       </Stack>
+      <DialogBox
+        active={showDialogBox}
+        message={dialogBoxMessage}
+        okayButtonText={"Okay"}
+        onOkay={() => {
+          setShowDialogBox(false);
+          navigate("/");
+        }}></DialogBox>
     </Box>
   );
 };

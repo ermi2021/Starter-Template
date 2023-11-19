@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../services/userServices";
 
 const UserNavigationDropDown = () => {
   const navigate = useNavigate();
@@ -37,8 +38,8 @@ const UserNavigationDropDown = () => {
             <MenuItem>Settings</MenuItem>
 
             <MenuItem
-              onClick={() => {
-                navigate("/");
+              onClick={async () => {
+                logout().then(()=>{ window.location.reload() })
               }}
             >
               Sign out
