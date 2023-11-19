@@ -32,6 +32,10 @@ import Login from "../../pages/auth/login";
 const Wrap = ({ children }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [registerClicked, setRegisterClicked] = useState(false);
+
+  const closeModal = () => {
+    onClose();
+  };
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -42,7 +46,7 @@ const Wrap = ({ children }: any) => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalBody>{registerClicked ? <SignUp /> : <Login />}</ModalBody>
+          <ModalBody>{registerClicked ? <SignUp /> : <Login onCloseModal={closeModal}/>}</ModalBody>
 
           <ModalFooter>
             {/* <Button colorScheme='blue' mr={3} onClick={onClose}>

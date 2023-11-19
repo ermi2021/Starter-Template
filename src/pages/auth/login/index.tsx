@@ -10,6 +10,7 @@ import {
   Spacer,
   InputGroup,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useFormik } from "formik";
@@ -19,12 +20,14 @@ import * as yup from "yup";
 import {login} from "../../../services/userServices"
 import DialogBox from "../../../components/dialogbox/index"
 
-const Login = () => {
+const Login = (props: {
+  onCloseModal: () => void;
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasword, setShowPassword] = useState(false);
   const [showDialogBox, setShowDialogBox] = useState(false);
   const [dialogBoxMessage, setDialogBoxMessage] = useState("Login successful");
-
+  const toast = useToast();
 
   const navigate = useNavigate();
   const LoginSchema = yup.object().shape({
@@ -41,16 +44,32 @@ const Login = () => {
       setIsLoading(true);
       login(values.username, values.password).then((res)=>{
         if (res) {
-          setShowDialogBox(true);
+          toast({
+            title: 'Account created.',
+            description: "We've created your account for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+            position:'top-right',
+            variant:'left-accent',
+          })
           setIsLoading(false)
           setTimeout(() => {
-            window.location.reload()
+           props.onCloseModal();
           }, 3000);
         }
         else {
-          setDialogBoxMessage("Invalid credentials");
-          setShowDialogBox(true);
+          toast({
+            title: 'Login failed.',
+            description: "invalid credientials, try again!",
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+            position:'top-right',
+            variant:'left-accent',
+          })
           setIsLoading(false)
+          props.onCloseModal();
         }
       })
     },
