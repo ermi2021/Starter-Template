@@ -8,11 +8,11 @@ import {
 import { LinkItemProps } from "../../../props/linkitem";
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Menu 1", icon: FiHome },
-  { name: "Menu 2", icon: FiTrendingUp },
-  { name: "Menu 3", icon: FiCompass },
-  { name: "Menu 4", icon: FiStar },
-  { name: "Menu 5", icon: FiSettings },
+  { name: "Home", icon: FiHome, route: "/" },
+  { name: "Menu 2", icon: FiTrendingUp, route: "/" },
+  { name: "Menu 3", icon: FiCompass, route: "/" },
+  { name: "Menu 4", icon: FiStar, route: "/" },
+  { name: "Menu 5", icon: FiSettings, route: "/" },
 ];
 
 export default LinkItems;

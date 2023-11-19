@@ -3,8 +3,10 @@ import { SidebarProps } from "../../props/sidebar";
 import UserNavigationDropDown from "../user/navDropdown";
 import LinkItems from "../../utils/data/sidebar/menuitems";
 import NavItem from "./navitem";
+import { useNavigate } from "react-router";
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const navigate = useNavigate();
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -22,7 +24,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} onClick={()=>{
+            navigate(link.route);
+        }}>
           {link.name}
         </NavItem>
       ))}
