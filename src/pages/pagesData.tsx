@@ -1,3 +1,4 @@
+import Account from "../components/account";
 import { routerType } from "../types/router.types";
 import Home from "./main/home";
 import Profile from "./main/profile";
