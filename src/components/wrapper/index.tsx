@@ -21,10 +21,9 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SidebarContent from "../sidebar";
 import UserNavigationDropDown from "../user/navDropdown";
-import { FiAnchor } from "react-icons/fi";
 import MobileNav from "../sidebar/onmobile";
 import SignUp from "../../pages/auth/signup";
 import Login from "../../pages/auth/login";
@@ -32,7 +31,11 @@ import Login from "../../pages/auth/login";
 const Wrap = ({ children }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [registerClicked, setRegisterClicked] = useState(false);
+  const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    console.log("token: ", token);
+  }, []);
   const closeModal = () => {
     onClose();
   };
@@ -46,7 +49,13 @@ const Wrap = ({ children }: any) => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalBody>{registerClicked ? <SignUp /> : <Login onCloseModal={closeModal}/>}</ModalBody>
+          <ModalBody>
+            {registerClicked ? (
+              <SignUp onCloseModal={closeModal} />
+            ) : (
+              <Login onCloseModal={closeModal} />
+            )}
+          </ModalBody>
 
           <ModalFooter>
             {/* <Button colorScheme='blue' mr={3} onClick={onClose}>
@@ -113,6 +122,7 @@ const Wrap = ({ children }: any) => {
             position={"sticky"}
             top={"0"}
             boxShadow={"sm"}
+            zIndex="1000"
           >
             <HStack px={5}>
               <Show breakpoint="(max-width: 767px)">
@@ -133,33 +143,35 @@ const Wrap = ({ children }: any) => {
                 />
               </Hide>
 
-              <Stack spacing={4} direction="row" align="center">
-                <Button
-                  variant={"link"}
-                  textDecoration={"none"}
-                  colorScheme="teal"
-                  size="sm"
-                  onClick={() => {
-                    setRegisterClicked(false);
-                    onOpen();
-                  }}
-                >
-                  Sign In
-                </Button>
-                <Button
-                  color={"white"}
-                  bgColor="#1475e1"
-                  size="sm"
-                  onClick={() => {
-                    setRegisterClicked(true);
-                    onOpen();
-                  }}
-                >
-                  Register
-                </Button>
-              </Stack>
-              <UserNavigationDropDown />
-              <FiAnchor />
+              {token === null || token === undefined ? ( // Check if token exists in local storage
+                <Stack spacing={4} direction="row" align="center">
+                  <Button
+                    variant={"link"}
+                    textDecoration={"none"}
+                    colorScheme="teal"
+                    size="sm"
+                    onClick={() => {
+                      setRegisterClicked(false);
+                      onOpen();
+                    }}
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    color={"white"}
+                    bgColor="#1475e1"
+                    size="sm"
+                    onClick={() => {
+                      setRegisterClicked(true);
+                      onOpen();
+                    }}
+                  >
+                    Register
+                  </Button>
+                </Stack>
+              ) : (
+                <UserNavigationDropDown />
+              )}
             </HStack>
           </GridItem>
           {/* </Hide> */}

@@ -1,0 +1,15 @@
+export interface UserProp {
+    "id": number,
+    "username": string,
+    "balance": string,
+    "total_in": number,
+    "total_out": number,
+    "refunds": string,
+    "role_id": number,
+    "status": string,
+    "language": string,
+    "currency": string,
+    "last_login":string,
+    "created_at":string,
+    "updated_at":string,
+}

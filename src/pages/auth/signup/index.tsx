@@ -10,6 +10,7 @@ import {
   Spacer,
   InputGroup,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useFormik } from "formik";
@@ -18,9 +19,11 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import phoneRegExp from "../../../utils/validation/phonenumber";
 import { signup } from "../../../services/userServices";
-import DialogBox from "../../../components/dialogbox/index"
+import DialogBox from "../../../components/dialogbox/index";
+import SuccessToast from "../../../components/toast/successtoast";
+import ErrorToast from "../../../components/toast/errortoast";
 
-const SignUp = () => {
+const SignUp = (props: { onCloseModal: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasword, setShowPassword] = useState(false);
   const [showNewPasword, setShowNewPassword] = useState(false);
@@ -28,7 +31,7 @@ const SignUp = () => {
     useState(false);
   const [showDialogBox, setShowDialogBox] = useState(false);
   const [dialogBoxMessage, setDialogBoxMessage] = useState("Signup successful");
-
+  const toast = useToast();
   const navigate = useNavigate();
   const SignUpSchema = yup.object().shape({
     phoneNumber: yup.string().matches(phoneRegExp, "Phone number is not valid"),
@@ -49,17 +52,27 @@ const SignUp = () => {
       setTimeout(() => {
         if (formik.isValid) {
           if (values.password === values.confirmpassword) {
-            signup(values.username, values.password, values.phoneNumber).then(val => {
-              if (val) {
-                setShowDialogBox(true);
-                setIsLoading(false);
+            signup(values.username, values.password, values.phoneNumber).then(
+              (val) => {
+                if (val) {
+                  SuccessToast({
+                    message: "Account created succesfully.",
+                    title: "Account Created!",
+                    toast: toast,
+                  });
+                  props.onCloseModal();
+                  setIsLoading(false);
+                } else {
+                  ErrorToast({
+                    message: "Account signup failed, please try again!",
+                    title: "Signup failed!",
+                    toast: toast,
+                  });
+              
+                  setIsLoading(false);
+                }
               }
-              else {
-                setShowDialogBox(true)
-                setDialogBoxMessage("Something went wrong");
-                setIsLoading(false);
-              }
-            })
+            );
             navigate("/home");
           } else {
             setShowPasswordConfirmationError(true);
@@ -72,12 +85,7 @@ const SignUp = () => {
     },
   });
   return (
-    <Box
-      bg={"transparent"}
-      p={7}
-      borderRadius={"lg"}
-
-    >
+    <Box bg={"transparent"} p={7} borderRadius={"lg"}>
       <Divider
         orientation="horizontal"
         color={"black"}
@@ -224,7 +232,8 @@ const SignUp = () => {
         onOkay={() => {
           setShowDialogBox(false);
           navigate("/");
-        }}></DialogBox>
+        }}
+      ></DialogBox>
     </Box>
   );
 };

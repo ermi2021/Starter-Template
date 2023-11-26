@@ -4,9 +4,13 @@ import UserNavigationDropDown from "../user/navDropdown";
 import LinkItems from "../../utils/data/sidebar/menuitems";
 import NavItem from "./navitem";
 import { useNavigate } from "react-router";
+import { LinkItemProps } from "../../props/linkitem";
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const navigate = useNavigate();
+  const activeLinks:LinkItemProps[] = LinkItems.filter((item)=>{
+    return item.active === true;
+  });
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -23,8 +27,10 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={()=>{
+
+      {activeLinks.map((link) => (
+        
+        <NavItem  key={link.name} icon={link.icon} onClick={()=>{
             navigate(link.route);
         }}>
           {link.name}

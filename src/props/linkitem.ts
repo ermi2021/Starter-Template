@@ -4,4 +4,5 @@ export interface LinkItemProps {
   name: string;
   icon: IconType;
   route: string;
+  active: boolean;
 }

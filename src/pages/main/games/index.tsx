@@ -1,25 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  Grid,
-  GridItem,
-  Box,
-  Image,
-  Text,
-  Stack,
-  Heading,
-  Center,
-  useColorModeValue,
-  Spinner,
-} from "@chakra-ui/react";
-import AdvertBanner from "../../../components/advertbanner";
-import { useEffect, useState } from "react";
-import { gameService } from "../../../services/gamesService";
-import { Link } from "react-router-dom";
+import { Grid, GridItem,Spinner,useColorModeValue,Box,Image,Stack,Text, Heading, Link, Center } from "@chakra-ui/react";
+import { useEffect, useState} from "react";
 import { GameProp } from "../../../props/game";
-const Home = () => {
+import { gameService } from "../../../services/gamesService";
 
+const Games = () => {
   const [games, setGames] = useState<GameProp[]>([]);
   const [loading, setLoading] = useState(false);
+
 
   const getGames = async () => {
     setLoading(true);
@@ -47,18 +35,9 @@ const Home = () => {
   }, []);
 
   return (
-    <Grid
-      templateAreas={`"banner"
-                  "main"
-                  `}
-      minH="100%"
-      w={"100%"}
-      gap={4}
-    >
-      <GridItem overflow={"hidden"} area={"banner"}>
-        <AdvertBanner />
-      </GridItem>
-      {loading ? (
+    <>
+       {loading ? (
+        <Center>
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -68,12 +47,12 @@ const Home = () => {
           alignSelf={'center'}
           justifySelf={'center'}
         />
+        </Center>
       ) : (
-        <GridItem area={"main"}>
           <Grid
             templateColumns={{
-              base: "repeat(3, 1fr)",
-              md: "repeat(3, 1fr)",
+              base: "repeat(4, 1fr)",
+              md: "repeat(4, 1fr)",
               lg: "repeat(3, 1fr)",
               xl: "repeat(3, 1fr)",
             }}
@@ -84,7 +63,6 @@ const Home = () => {
             {games.map((game) => (
               <GridItem
                 as={Link} // Use the Link component
-                to={`/game/${game.id}`}
                 cursor={"pointer"}
               >
                 <Center py={12}>
@@ -154,10 +132,9 @@ const Home = () => {
               </GridItem>
             ))}
           </Grid>
-        </GridItem>
       )}
-    </Grid>
+   </>
   );
 };
 
-export default Home;
+export default Games;

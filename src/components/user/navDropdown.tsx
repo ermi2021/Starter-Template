@@ -28,14 +28,7 @@ const UserNavigationDropDown = () => {
             bg={useColorModeValue("white", "gray.900")}
             borderColor={useColorModeValue("gray.200", "gray.700")}
           >
-            <MenuItem
-              onClick={() => {
-                navigate("/user");
-              }}
-            >
-              Profile
-            </MenuItem>
-            <MenuItem>Settings</MenuItem>
+        
 
             <MenuItem
               onClick={async () => {

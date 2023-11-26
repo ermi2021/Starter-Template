@@ -1,18 +1,14 @@
 import {
   FiCompass,
   FiHome,
-  FiSettings,
-  FiStar,
   FiTrendingUp,
 } from "react-icons/fi";
 import { LinkItemProps } from "../../../props/linkitem";
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome, route: "/" },
-  { name: "Menu 2", icon: FiTrendingUp, route: "/" },
-  { name: "Menu 3", icon: FiCompass, route: "/" },
-  { name: "Menu 4", icon: FiStar, route: "/" },
-  { name: "Menu 5", icon: FiSettings, route: "/" },
+  { name: "Home", icon: FiHome, route: "/",active: true },
+  { name: "Games", icon: FiCompass, route: "/games",active: true  },
+  { name: "Account", icon: FiTrendingUp, route: "/user",active: false  },
 ];
 
 export default LinkItems;
