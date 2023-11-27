@@ -1,11 +1,6 @@
 import {
-  Text,
   Flex,
-  Center,
   Box,
-  Image,
-  HStack,
-  VStack,
 } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
 

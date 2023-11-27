@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import axiosInstance from "./interceptor";
 const API_BASE_URL = "https://bs.mehal.com.et/api";
 

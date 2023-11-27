@@ -2,21 +2,12 @@
 import {
   Grid,
   GridItem,
-  Box,
-  Image,
-  Text,
-  Stack,
-  Heading,
-  Center,
-  useColorModeValue,
   Spinner,
 } from "@chakra-ui/react";
 import AdvertBanner from "../../../components/advertbanner";
 import { useEffect, useState } from "react";
 import { gameService } from "../../../services/gamesService";
-import { Link } from "react-router-dom";
 import { GameProp } from "../../../props/game";
-import { getGameUrl } from "../../../services/gameService";
 import Game from "../../../components/game";
 const Home = () => {
 

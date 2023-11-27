@@ -15,18 +15,10 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Button,
   useDisclosure,
   Modal,
   ModalOverlay,
   Spinner,
-  ModalFooter,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-  Popover,
 } from "@chakra-ui/react";
 import { GameProp } from "../../props/game";
 import { getGameUrl } from "../../services/gameService";
@@ -35,7 +27,7 @@ import { useState } from "react";
 const Game = ({ games }: { games: GameProp[] }) => {
   const [loading, setLoading] = useState(false);
   const [accountCheck, setAccountCheck] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onClose } = useDisclosure();
   const resolveGameUrl = async (name: string) => {
     setLoading(true);
     const gameUrl: any = await getGameUrl(name);

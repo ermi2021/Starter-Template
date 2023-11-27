@@ -30,7 +30,7 @@ const SignUp = (props: { onCloseModal: () => void }) => {
   const [showPasswordConfirmationError, setShowPasswordConfirmationError] =
     useState(false);
   const [showDialogBox, setShowDialogBox] = useState(false);
-  const [dialogBoxMessage, setDialogBoxMessage] = useState("Signup successful");
+  const [dialogBoxMessage] = useState("Signup successful");
   const toast = useToast();
   const navigate = useNavigate();
   const SignUpSchema = yup.object().shape({

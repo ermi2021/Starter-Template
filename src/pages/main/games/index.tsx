@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Grid, GridItem,Spinner,useColorModeValue,Box,Image,Stack,Text, Heading, Link, Center } from "@chakra-ui/react";
+import { Spinner,Center } from "@chakra-ui/react";
 import { useEffect, useState} from "react";
 import { GameProp } from "../../../props/game";
 import { gameService } from "../../../services/gamesService";

@@ -1,4 +1,3 @@
-import Account from "../components/account";
 import { routerType } from "../types/router.types";
 import Game from "./main/game";
 import Games from "./main/games";

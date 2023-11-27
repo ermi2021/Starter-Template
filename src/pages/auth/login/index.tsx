@@ -27,7 +27,7 @@ const Login = (props: { onCloseModal: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasword, setShowPassword] = useState(false);
   const [showDialogBox, setShowDialogBox] = useState(false);
-  const [dialogBoxMessage, setDialogBoxMessage] = useState("Login successful");
+  const [dialogBoxMessage] = useState("Login successful");
   const toast = useToast();
 
   const navigate = useNavigate();

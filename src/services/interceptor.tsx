@@ -6,7 +6,6 @@ const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
 });
 axiosInstance.interceptors.request.use((config) => {
-  console.log('intersecptor');
   // Global request interceptor logic
   // add header bearer token here
   config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
