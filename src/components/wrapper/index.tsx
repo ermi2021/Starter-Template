@@ -21,7 +21,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import SidebarContent from "../sidebar";
 import UserNavigationDropDown from "../user/navDropdown";
 import MobileNav from "../sidebar/onmobile";
@@ -33,9 +33,6 @@ const Wrap = ({ children }: any) => {
   const [registerClicked, setRegisterClicked] = useState(false);
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    console.log("token: ", token);
-  }, []);
   const closeModal = () => {
     onClose();
   };

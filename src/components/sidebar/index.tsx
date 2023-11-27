@@ -45,7 +45,7 @@ const SidebarContent = ({ onCloseSidebar, ...rest }: SidebarProps) => {
           key={link.name}
           icon={link.icon}
           onClick={() => {
-            if (link.active == false && !localStorage.getItem("token")) {
+            if (link.active === false && !localStorage.getItem("token")) {
               onToggle();
             } else {
               navigate(link.route);
@@ -68,11 +68,6 @@ const SidebarContent = ({ onCloseSidebar, ...rest }: SidebarProps) => {
         <ModalCloseButton />
           <ModalBody fontWeight={'semibold'} mb={5}>Please sign in to go to your account page</ModalBody>
 
-          {/* <ModalFooter>
-            <Button colorScheme="red" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </Box>

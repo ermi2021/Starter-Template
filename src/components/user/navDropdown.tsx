@@ -8,7 +8,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiUser } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/userServices";
 
 const UserNavigationDropDown = () => {
