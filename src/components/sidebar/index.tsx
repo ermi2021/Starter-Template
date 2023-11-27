@@ -1,4 +1,27 @@
-import { Box, useColorModeValue, Flex,Text, CloseButton } from "@chakra-ui/react";
+/* eslint-disable react/jsx-no-undef */
+import {
+  Box,
+  useColorModeValue,
+  Flex,
+  Text,
+  CloseButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  Button,
+  useDisclosure,
+  ModalFooter,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+} from "@chakra-ui/react";
 import { SidebarProps } from "../../props/sidebar";
 import UserNavigationDropDown from "../user/navDropdown";
 import LinkItems from "../../utils/data/sidebar/menuitems";
@@ -6,11 +29,10 @@ import NavItem from "./navitem";
 import { useNavigate } from "react-router";
 import { LinkItemProps } from "../../props/linkitem";
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onCloseSidebar, ...rest }: SidebarProps) => {
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const activeLinks:LinkItemProps[] = LinkItems.filter((item)=>{
-    return item.active === true;
-  });
+
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -28,17 +50,41 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
 
-      {activeLinks.map((link) => (
-        
-        <NavItem  key={link.name} icon={link.icon} onClick={()=>{
-            navigate(link.route);
-        }}>
+      {LinkItems.map((link) => (
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          onClick={() => {
+            if (link.active == false && !localStorage.getItem("token")) {
+              onToggle();
+            } else {
+              navigate(link.route);
+            }
+          }}
+        >
           {link.name}
         </NavItem>
       ))}
+
       <Box display={{ sm: "block", md: "none" }} ml={7}>
-       <UserNavigationDropDown/>
+        <UserNavigationDropDown />
       </Box>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+       
+        <ModalHeader>Sign in required</ModalHeader>
+        <ModalCloseButton />
+          <ModalBody fontWeight={'semibold'} mb={5}>Please sign in to go to your account page</ModalBody>
+
+          {/* <ModalFooter>
+            <Button colorScheme="red" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter> */}
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };

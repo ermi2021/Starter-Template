@@ -42,7 +42,7 @@ const Wrap = ({ children }: any) => {
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
-        onClose={() => {}}
+        onCloseSidebar={() => {}}
         display={{ base: "none", md: "block" }}
       />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -74,7 +74,7 @@ const Wrap = ({ children }: any) => {
         size="full"
       >
         <DrawerContent>
-          <SidebarContent onClose={() => {}} />
+          <SidebarContent onCloseSidebar={() => {}} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}

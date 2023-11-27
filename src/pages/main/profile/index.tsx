@@ -1,81 +1,110 @@
+/* eslint-disable react/jsx-no-undef */
+"use client";
+
 import {
+  Container,
+  Flex,
   Box,
-  Center,
-  HStack,
-  Spacer,
+  Heading,
   Text,
-  Divider,
+  IconButton,
   Button,
+  VStack,
+  HStack,
+  Wrap,
+  WrapItem,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+  useColorModeValue,
+  Stat,
+  StatLabel,
+  StatNumber,
+  SimpleGrid,
+  Center,
+  Stack,
 } from "@chakra-ui/react";
+import {
+  MdPhone,
+  MdEmail,
+  MdLocationOn,
+  MdFacebook,
+  MdOutlineEmail,
+} from "react-icons/md";
 
-const Profile = () => {
-  return (
-    <Box
-      display={"flex"}
-      flexDirection={"row"}
-      alignContent={"center"}
-      justifyContent={{ sm: "flex-start", lg: "center", md: "center" }}
-    >
-      <Box
-        m={{ base: 1, sm: 1, md: 5, lg: 10 }}
-        p={{ base: 2, sm: 2, md: 5, lg: 10 }}
-        w={{ base: "100%", sm: "100%", md: "80%", lg: "70%" }}
-        bg={"white"}
-        boxShadow={"lg"}
-        borderRadius={"lg"}
-      >
-        <Box>
-          <Text
-            size={"lg"}
-            fontSize={{ base: "sm", sm: "sm", md: "lg", lg: "xl" }}
-          >
-            Account Details
-          </Text>
-          <Divider />
-        </Box>
+import { useEffect, useState } from "react";
+import { accountService } from "../../../services/accountService";
+import { UserProp } from "../../../props/user";
+import StatsCard from "../../../components/statcard";
+import { FaArrowDown, FaArrowUp, FaMoneyBillWave } from "react-icons/fa";
 
-        <HStack spacing={4} m={4} direction="row" align="center">
-          <Text fontWeight={"normal"}   fontSize={{ base: "sm", sm: "sm", md: "lg", lg: "xl" }}>current username</Text>
-          <Spacer />
-          <Button
-            colorScheme="teal"
-            size="sm"
-            variant={"outline"}
-            color={"green.400"}
-            fontSize={{ base: "sm", sm: "sm", md: "lg", lg: "xl" }}
-          >
-            update
-          </Button>
-        </HStack>
-        <Divider />
-        <HStack spacing={4} m={4} direction="row" align="center">
-          <Text fontWeight={"normal"}>current username</Text>
-          <Spacer />
-          <Button
-            colorScheme="teal"
-            size="sm"
-            variant={"outline"}
-            color={"green.400"}
-          >
-            update
-          </Button>
-        </HStack>
-        <Divider />
-        <HStack spacing={4} m={4} direction="row" align="center">
-          <Text fontWeight={"normal"}>current username</Text>
-          <Spacer />
-          <Button
-            colorScheme="teal"
-            size="sm"
-            variant={"outline"}
-            color={"green.400"}
-          >
-            update
-          </Button>
-        </HStack>
-      </Box>
-    </Box>
-  );
+export default function Profile() {
+  const [userInformation, setUserInformation] = useState<UserProp | any>();
+  const [showDepositInput, setShowDepositInput] = useState(false);
+  const [showWithdrawInput, setShowWithdrawInput] = useState(false);
+  const [depositAmount, setDepositAmount] = useState(0);
+  const [withdrawAmount, setWithdrawAmount] = useState(0);
+  const getUserInformation = async () => {
+    const user = await accountService();
+
+    if (user) {
+      console.log("user: ", user);
+
+      setUserInformation(user);
+    }
+  };
+
+  const handleDepositClick = () => {
+    setShowDepositInput(true);
+    setShowWithdrawInput(false);
 };
 
-export default Profile;
+const handleWithdrawClick = () => {
+    setShowWithdrawInput(true);
+    setShowDepositInput(false);
+};
+
+  useEffect(() => {
+    getUserInformation();
+  }, []);
+  return (
+    <Box h={"full"} flexDirection={"column"} mx={5}>
+      <Stack direction="row" my={3} spacing={4} justify="space-between" alignContent={'center'} alignItems={'center'} mb={4}>
+      <Text
+        fontWeight={"bold"}
+        fontSize={"2xl"}
+        color={"black"}
+        my={4}
+        textAlign={"center"}
+      >
+        Account Information
+      </Text>
+      <Stack direction="row" my={3} spacing={4} justify="end" mb={4}>
+        <Button  bg={'green.400'} color={'white'} onClick={handleDepositClick}>Deposit</Button>
+        <Button bg={'red.400'} color={'white'} onClick={handleWithdrawClick}>Withdraw</Button>
+      </Stack>
+      </Stack>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+        <StatsCard
+          title={"Balance"}
+          stat={userInformation?.balance + " " + userInformation?.currency}
+          icon={<FaMoneyBillWave size={"2em"} />}
+        />
+        <StatsCard
+          title={"Total In"}
+          stat={userInformation?.total_in + " " + userInformation?.currency}
+          icon={<FaArrowDown size={"2em"} />}
+        />
+        <StatsCard
+          title={"Total Out"}
+          stat={userInformation?.total_out + " " + userInformation?.currency}
+          icon={<FaArrowUp size={"2em"} />}
+        />
+      </SimpleGrid>
+     
+    </Box>
+  );
+}
