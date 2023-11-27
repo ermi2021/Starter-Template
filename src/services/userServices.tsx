@@ -21,7 +21,7 @@ export const login = async (username: string, password: string) => {
 
 export const logout = async () => {
     try {
-    const response = await axiosInstance.post(`${API_BASE_URL}/logout`);
+    await axiosInstance.post(`${API_BASE_URL}/logout`);
         // remove token and key from local storage
         localStorage.removeItem('token');
         localStorage.removeItem('key');
