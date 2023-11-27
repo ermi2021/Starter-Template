@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/userServices";
 
 const UserNavigationDropDown = () => {
-  const navigate = useNavigate();
   return (
     <HStack spacing={{ base: "0", md: "6" }}>
       <Flex alignItems={"center"}>

@@ -5,16 +5,7 @@ import {
   Flex,
   Text,
   CloseButton,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-  Button,
   useDisclosure,
-  ModalFooter,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -27,7 +18,6 @@ import UserNavigationDropDown from "../user/navDropdown";
 import LinkItems from "../../utils/data/sidebar/menuitems";
 import NavItem from "./navitem";
 import { useNavigate } from "react-router";
-import { LinkItemProps } from "../../props/linkitem";
 
 const SidebarContent = ({ onCloseSidebar, ...rest }: SidebarProps) => {
   const { isOpen, onToggle, onClose } = useDisclosure();

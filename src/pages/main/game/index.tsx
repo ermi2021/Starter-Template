@@ -2,17 +2,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-undef */
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { gameService } from "../../../services/gamesService";
+import { useLocation } from "react-router-dom";
 import { GameProp } from "../../../props/game";
 import {
   Box,
   Center,
-  GridItem,
   Heading,
   Stack,
   Text,
-  Link,
   useColorModeValue,
   Image,
 } from "@chakra-ui/react";
