@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Hide,
 } from "@chakra-ui/react";
 import { SidebarProps } from "../../props/sidebar";
 import UserNavigationDropDown from "../user/navDropdown";
@@ -61,7 +62,9 @@ const SidebarContent = ({ onCloseSidebar, ...rest }: SidebarProps) => {
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <Hide below="md">
+        <ModalOverlay  />
+        </Hide>
         <ModalContent>
        
         <ModalHeader>Sign in required</ModalHeader>

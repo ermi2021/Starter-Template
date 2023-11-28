@@ -19,6 +19,7 @@ import {
   Modal,
   ModalOverlay,
   Spinner,
+  Hide,
 } from "@chakra-ui/react";
 import { GameProp } from "../../props/game";
 import { getGameUrl } from "../../services/gameService";
@@ -43,12 +44,15 @@ const Game = ({ games }: { games: GameProp[] }) => {
   return (
     <Box>
       <Modal isCentered isOpen={loading} onClose={onClose}>
-        <ModalOverlay
-          bg="blackAlpha.300"
-          backdropFilter="blur(10px) hue-rotate(90deg)"
-        />
+        <Hide below="md">
+          <ModalOverlay
+            bg="blackAlpha.300"
+            backdropFilter="blur(10px) hue-rotate(90deg)"
+          />
+        </Hide>
+
         <ModalContent>
-          <ModalHeader fontWeight={"bold"} fontSize={'md'} textAlign={"center"}>
+          <ModalHeader fontWeight={"bold"} fontSize={"md"} textAlign={"center"}>
             Your Game is Loading, Please Wait
           </ModalHeader>
 
@@ -65,9 +69,13 @@ const Game = ({ games }: { games: GameProp[] }) => {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <Modal isCentered isOpen={accountCheck} onClose={()=>{
-        setAccountCheck(false);
-      }}>
+      <Modal
+        isCentered
+        isOpen={accountCheck}
+        onClose={() => {
+          setAccountCheck(false);
+        }}
+      >
         <ModalOverlay
           bg="blackAlpha.300"
           backdropFilter="blur(10px) hue-rotate(90deg)"
@@ -78,9 +86,10 @@ const Game = ({ games }: { games: GameProp[] }) => {
           <ModalCloseButton />
 
           <ModalBody>
-          
-              <Text textAlign={'left'} fontWeight={'bold'}> Sign in to play a game.</Text>
-         
+            <Text textAlign={"left"} fontWeight={"bold"}>
+              {" "}
+              Sign in to play a game.
+            </Text>
           </ModalBody>
         </ModalContent>
       </Modal>
