@@ -29,12 +29,15 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       justifyContent="space-between"
     >
       {LinkItems.map((menu) => (
-        <BottomNavigationItem>
+        <BottomNavigationItem
+       
+        >
           <BottomNavigationIcon as={menu.icon} color={"white"} />
           <BottomNavigationLabel
             fontSize={"xs"}
             color={"white"}
             fontWeight={"bold"}
+            
           >
             {menu.name}
           </BottomNavigationLabel>

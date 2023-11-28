@@ -184,7 +184,7 @@ const Wrap = ({ children }: any) => {
           >
             {children}
           </GridItem>
-          <GridItem area={"footer"} position={"sticky"} bottom={"0"}>
+          <GridItem area={"footer"} position={"sticky"} zIndex={2} bottom={"0"}>
             <Show breakpoint="(max-width: 767px)">
               <MobileNav onOpen={onOpen} />
             </Show>
