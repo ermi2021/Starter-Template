@@ -1,4 +1,15 @@
-import { FlexProps } from "@chakra-ui/react";
+/* eslint-disable react/jsx-no-undef */
+import {
+  FlexProps,
+  Hide,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import {
   BottomNavigation,
   BottomNavigationIcon,
@@ -7,12 +18,15 @@ import {
 } from "chakra-ui-bottom-navigation";
 import LinkItems from "../../utils/data/sidebar/menuitems";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const [index, setIndex] = useState(0);
+  const { isOpen, onToggle, onClose } = useDisclosure();
+  const navigate = useNavigate();
   return (
     <BottomNavigation
       value={index}
@@ -28,16 +42,33 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       alignItems="center"
       justifyContent="space-between"
     >
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <Hide below="md">
+          <ModalOverlay />
+        </Hide>
+        <ModalContent>
+          <ModalHeader>Sign in required</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody fontWeight={"semibold"} mb={5}>
+            Please sign in to go to your account page
+          </ModalBody>
+        </ModalContent>
+      </Modal>
       {LinkItems.map((menu) => (
         <BottomNavigationItem
-       
+          onClick={() => {
+            if (menu.active === false && !localStorage.getItem("token")) {
+              onToggle();
+            } else {
+              navigate(menu.route);
+            }
+          }}
         >
           <BottomNavigationIcon as={menu.icon} color={"white"} />
           <BottomNavigationLabel
             fontSize={"xs"}
             color={"white"}
             fontWeight={"bold"}
-            
           >
             {menu.name}
           </BottomNavigationLabel>

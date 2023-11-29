@@ -1,6 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/jsx-no-undef */
 import {
-  Flex,
   Box,
+  Image,
+  useColorModeValue,
+  Text,
+  GridItem,
+  Grid,
 } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
 
@@ -10,44 +16,100 @@ const AdvertBanner = () => {
     <Carousel
       showIndicators={false}
       showThumbs={false}
-      autoPlay={true}
-      infiniteLoop={true}
+      autoPlay={false}
+      infiniteLoop={false}
       showStatus={false}
+      
     >
-      <Flex h={"fit-content"} w={"full"} bg={"cyan.800"}>
-        <Box
-          h={"300px"}
-          flexDirection={"row"}
-          flex="1"
-          justifyItems={"center"}
-          alignContent={"center"}
-          justifyContent={"center"}
+     <Box height={'fit'} bg={'teal.500'} paddingY={4}>
+      <Grid
+        templateColumns={{
+          base: "repeat(1, 1fr)",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(4, 1fr)",
+          xl: "repeat(4, 1fr)",
+        }}
+        minH="100%"
+        w={"fit"}
+        marginX={10}
+        gap={4}
+      
+      >
+      
+          {[
+            "https://client-int.qtlauncher.com/images/?id=TRB-bayraktar_en_US&type=logo-square&version=1689799195526",
+            "https://client-int.qtlauncher.com/images/?id=1x2-coinfield_en_US&type=logo-square&version=1667798993145",
+            "https://client-int.qtlauncher.com/images/?id=GLX-coinflip_en_US&type=logo-square&version=1695782753222",
+            "https://client-int.qtlauncher.com/images/?id=TRB-turboplinko_en_US&type=logo-square&version=1689797661198",
+          ].map((val) => (
+            <GridItem>
+            <Box
+              // flex={{ base: 1, sm: 0.5, md: 0.25, lg: 0.25 }}
+              bg={useColorModeValue("white", "gray.800")}
+              maxW="sm"
+              borderWidth="1px"
+              cursor={"pointer"}
+              rounded="lg"
+              shadow="lg"
+              position="relative"
+              _hover={{ shadow: "3xl", transition: "all .3s ease" }}
+            >
+              <Image src={val} w={"220"} h={"220"} roundedTop="lg" />
+              <Text paddingY={2} fontSize={"sm"} fontWeight={"semibold"}>
+                Category
+              </Text>
+            </Box>
+            </GridItem>
+          ))}
        
-          sx={{
-            background:
-              "url(https://t3.ftcdn.net/jpg/04/32/13/30/360_F_432133021_lpYj0WnQ6IrEZqPxRn3j0OPWBrascZjD.jpg) center/cover no-repeat",
-          }}
-        >
+      </Grid>
+      </Box>
+      <Box height={'fit'} bg={'teal.500'} paddingY={4}>
+      <Grid
+        templateColumns={{
+          base: "repeat(2, 1fr)",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(4, 1fr)",
+          lg: "repeat(4, 1fr)",
+          xl: "repeat(4, 1fr)",
+        }}
+        minH="100%"
+        w={"fit"}
+        marginX={10}
+        gap={4}
+      
+      >
+      
+          {[
+            "https://client-int.qtlauncher.com/images/?id=TRB-bayraktar_en_US&type=logo-square&version=1689799195526",
+            "https://client-int.qtlauncher.com/images/?id=1x2-coinfield_en_US&type=logo-square&version=1667798993145",
+            "https://client-int.qtlauncher.com/images/?id=GLX-coinflip_en_US&type=logo-square&version=1695782753222",
+            "https://client-int.qtlauncher.com/images/?id=TRB-turboplinko_en_US&type=logo-square&version=1689797661198",
+          ].map((val) => (
+            <GridItem>
+            <Box
+              // flex={{ base: 1, sm: 0.5, md: 0.25, lg: 0.25 }}
+              bg={useColorModeValue("white", "gray.800")}
+              maxW="sm"
+              borderWidth="1px"
+              cursor={"pointer"}
+              rounded="lg"
+              shadow="lg"
+              position="relative"
+              _hover={{ shadow: "3xl", transition: "all .3s ease" }}
+            >
+              <Image src={val} w={"220"} h={"220"} roundedTop="lg" />
+              <Text paddingY={2} fontSize={"sm"} fontWeight={"semibold"}>
+                Category
+              </Text>
+            </Box>
+            </GridItem>
+          ))}
        
-        </Box>
-      </Flex>
-      <Flex h={"fit-content"} w={"full"} bg={"cyan.800"}>
-        <Box
-          h={"300px"}
-          flexDirection={"row"}
-          flex="1"
-          justifyItems={"center"}
-          alignContent={"center"}
-          justifyContent={"center"}
-       
-          sx={{
-            background:
-              "url(https://t3.ftcdn.net/jpg/04/32/13/30/360_F_432133021_lpYj0WnQ6IrEZqPxRn3j0OPWBrascZjD.jpg) center/cover no-repeat",
-          }}
-        >
-       
-        </Box>
-      </Flex>
+      </Grid>
+      </Box>
+    
     </Carousel>
   );
 };

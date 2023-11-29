@@ -21,21 +21,24 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
-import { useState} from "react";
+import { useState } from "react";
 import SidebarContent from "../sidebar";
 import UserNavigationDropDown from "../user/navDropdown";
 import MobileNav from "../sidebar/onmobile";
 import SignUp from "../../pages/auth/signup";
 import Login from "../../pages/auth/login";
+import { UserProp } from "../../props/user";
 
 const Wrap = ({ children }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [registerClicked, setRegisterClicked] = useState(false);
+
   const token = localStorage.getItem("token");
 
   const closeModal = () => {
     onClose();
   };
+ 
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -127,6 +130,7 @@ const Wrap = ({ children }: any) => {
                   Logo
                 </Text>
               </Show>
+        
 
               <Spacer />
               <Hide breakpoint="(max-width: 767px)">
