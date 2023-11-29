@@ -27,7 +27,6 @@ import UserNavigationDropDown from "../user/navDropdown";
 import MobileNav from "../sidebar/onmobile";
 import SignUp from "../../pages/auth/signup";
 import Login from "../../pages/auth/login";
-import { UserProp } from "../../props/user";
 
 const Wrap = ({ children }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
