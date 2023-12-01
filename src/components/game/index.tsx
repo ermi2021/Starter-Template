@@ -24,23 +24,14 @@ import {
 import { GameProp } from "../../props/game";
 import { getGameUrl } from "../../services/gameService";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Game = ({ games }: { games: GameProp[] }) => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [accountCheck, setAccountCheck] = useState(false);
   const { onClose } = useDisclosure();
-  const resolveGameUrl = async (name: string) => {
-    setLoading(true);
-    const gameUrl: any = await getGameUrl(name);
-    console.log(gameUrl);
 
-    if (gameUrl?.url && localStorage.getItem("token")) {
-      setLoading(false);
-      window.open(gameUrl?.url, "_blank");
-    } else {
-      setLoading(false);
-    }
-  };
   return (
     <Box>
       <Modal isCentered isOpen={loading} onClose={onClose}>
@@ -110,7 +101,7 @@ const Game = ({ games }: { games: GameProp[] }) => {
             as={Link} // Use the Link component
             onClick={() => {
               if (localStorage.getItem("token")) {
-                resolveGameUrl(game.name);
+                navigate(`game/play/${game.name}`)
               } else {
                 setAccountCheck(true);
               }
@@ -161,7 +152,7 @@ const Game = ({ games }: { games: GameProp[] }) => {
                     alt="#"
                   />
                 </Box>
-                <Stack pt={10} align={"center"}>
+                {/* <Stack pt={10} align={"center"}>
                   <Text
                     color={"gray.500"}
                     fontSize={"sm"}
@@ -178,7 +169,7 @@ const Game = ({ games }: { games: GameProp[] }) => {
                   >
                     {game.title}
                   </Heading>
-                </Stack>
+                </Stack> */}
               </Box>
             </Center>
           </GridItem>

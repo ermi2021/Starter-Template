@@ -4,7 +4,7 @@ const API_BASE_URL = "https://bs.mehal.com.et/api";
 
 
 
-export const getGameUrl = async (name:string) => {
+export const getGameUrl = async (name:string | undefined) => {
     console.log('name inside service: ',name);
     
   try {

@@ -3,6 +3,8 @@ import Game from "./main/game";
 import Games from "./main/games";
 import Home from "./main/home";
 import Profile from "./main/profile";
+import GamePlay from "./main/gamePlay";
+
 const pagesData: routerType[] = [
   {
     path: "/",
@@ -24,7 +26,12 @@ const pagesData: routerType[] = [
     element: <Game />,
     title: "game"
   },
- 
+  {
+    path: "game/play/:name",
+    element: <GamePlay />,
+    title: "game play"
+    
+  },
 ];
 
 export default pagesData;
