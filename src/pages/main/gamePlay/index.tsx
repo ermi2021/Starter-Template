@@ -17,7 +17,7 @@ const GamePlay = () => {
   }
   useEffect(() => {
     getGameURL();
-  }, [name]);
+  }, []);
 
   return (
     <div style={{ height: "100vh" }}>
