@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 import {
   FlexProps,
-  Hide,
   Modal,
   ModalBody,
   ModalCloseButton,
