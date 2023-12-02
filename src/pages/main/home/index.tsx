@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
-  Box,
   Grid,
   GridItem,
   Hide,
   Input,
+  InputGroup,
+  InputLeftElement,
   Show,
   Spacer,
   Spinner,
 } from "@chakra-ui/react";
+import { BsSearch } from "react-icons/bs";
 import AdvertBanner from "../../../components/advertbanner";
 import { useEffect, useState } from "react";
 import { gameService } from "../../../services/gamesService";
@@ -66,18 +68,32 @@ const Home = () => {
           <AdvertBanner />
         </Show>
         <Spacer />
-        <Hide breakpoint="(max-width: 767px)">
-          <Box marginTop={2} justifyContent="right" display="flex">
-            <Input
-              placeholder="Search"
-              m={5}
-              size={"md"}
-              width={"30%"}
-              borderColor={"gray.300"}
-              focusBorderColor={"gray.400"}
-            />
-          </Box>
-        </Hide>
+
+        {/* <Box ml="auto" marginTop={5}> */}
+        <InputGroup display={"flex"} marginTop={5}>
+          <InputLeftElement children={<BsSearch />} />
+
+          <Input
+            placeholder="Search"
+            // m={5}
+            borderRadius={20}
+            backgroundColor={"gray.200"}
+            size={"md"}
+            // width={{breakpoint: "(min-width: 480px) and (max-width: 767px)"}}
+            width={{
+              xl: "30%",
+              lg: "30%",
+              md: "40%",
+              sm: "40%",
+              base: "100%",
+            }}
+            // width={"35%"}
+            border={"1px"}
+            borderColor={"gray.300"}
+            focusBorderColor={"gray.400"}
+          />
+        </InputGroup>
+        {/* </Box> */}
       </GridItem>
       {loading ? (
         <Spinner
