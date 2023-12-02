@@ -6,9 +6,6 @@ import {
   Center,
   Grid,
   GridItem,
-  Heading,
-  Text,
-  Stack,
   Image,
   useColorModeValue,
   ModalContent,
@@ -20,9 +17,9 @@ import {
   ModalOverlay,
   Spinner,
   Hide,
+  Show,
 } from "@chakra-ui/react";
 import { GameProp } from "../../props/game";
-import { getGameUrl } from "../../services/gameService";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -60,6 +57,7 @@ const Game = ({ games }: { games: GameProp[] }) => {
           </ModalBody>
         </ModalContent>
       </Modal>
+
       <Modal
         isCentered
         isOpen={accountCheck}
@@ -72,21 +70,19 @@ const Game = ({ games }: { games: GameProp[] }) => {
           backdropFilter="blur(10px) hue-rotate(90deg)"
         />
         <ModalCloseButton />
-        <ModalContent>
-          <ModalHeader> Sign in required!</ModalHeader>
+        <ModalContent margin={3} padding={2}>
+          <ModalHeader textAlign={"center"}> Sign in required!</ModalHeader>
           <ModalCloseButton />
 
-          <ModalBody>
-            <Text textAlign={"left"} fontWeight={"bold"}>
-              {" "}
-              Sign in to play a game.
-            </Text>
+          <ModalBody textAlign={"center"} fontWeight={"semibold"} mb={5}>
+            Sign in to play a game.
           </ModalBody>
         </ModalContent>
       </Modal>
+
       <Grid
         templateColumns={{
-          base: "repeat(1, 1fr)",
+          base: "repeat(3, 1fr)",
           sm: "repeat(2, 1fr)",
           md: "repeat(2, 1fr)",
           lg: "repeat(3, 1fr)",
@@ -101,77 +97,92 @@ const Game = ({ games }: { games: GameProp[] }) => {
             as={Link} // Use the Link component
             onClick={() => {
               if (localStorage.getItem("token")) {
-                navigate(`game/play/${game.name}`)
+                navigate(`game/play/${game.name}`);
               } else {
                 setAccountCheck(true);
               }
             }}
             cursor={"pointer"}
           >
-            <Center py={12}>
-              <Box
-                role={"group"}
-                p={6}
-                maxW={"330px"}
-                w={"full"}
-                bg={useColorModeValue("white", "gray.800")}
-                boxShadow={"2xl"}
-                rounded={"lg"}
-                pos={"relative"}
-                zIndex={1}
-              >
-                <Box
+            <Hide above="sm">
+              <Center>
+                <Image
                   rounded={"lg"}
-                  mt={-12}
+                  // height={200}
+                  shadow="md"
+                  width={282}
+                  objectFit={"contain"}
+                  src={game.chanceFirepot1}
+                  alt="#"
+                />
+              </Center>
+            </Hide>
+            <Show above="sm">
+              <Center py={12}>
+                <Box
+                  role={"group"}
+                  p={6}
+                  maxW={"330px"}
+                  w={"full"}
+                  bg={useColorModeValue("white", "gray.800")}
+                  boxShadow={"2xl"}
+                  rounded={"lg"}
                   pos={"relative"}
-                  height={"230px"}
-                  _after={{
-                    transition: "all .3s ease",
-                    content: '""',
-                    w: "full",
-                    h: "full",
-                    pos: "absolute",
-                    top: 5,
-                    left: 0,
-                    backgroundImage: `url(${game.chanceFirepot1})`,
-                    filter: "blur(10px)",
-                    zIndex: -1,
-                  }}
-                  _groupHover={{
-                    _after: {
-                      filter: "blur(20px)",
-                    },
-                  }}
+                  zIndex={1}
                 >
-                  <Image
-                    rounded={"sm"}
-                    height={200}
-                    width={282}
-                    objectFit={"contain"}
-                    src={game.chanceFirepot1}
-                    alt="#"
-                  />
+                  <Box
+                    rounded={"lg"}
+                    mt={-12}
+                    pos={"relative"}
+                    height={"230px"}
+                    _after={{
+                      transition: "all .3s ease",
+                      content: '""',
+                      w: "full",
+                      h: "full",
+                      pos: "absolute",
+                      top: 5,
+                      left: 0,
+                      backgroundImage: `url(${game.chanceFirepot1})`,
+                      filter: "blur(10px)",
+                      zIndex: -1,
+                    }}
+                    _groupHover={{
+                      _after: {
+                        filter: "blur(20px)",
+                      },
+                    }}
+                  >
+                    <Image
+                      rounded={"sm"}
+                      height={200}
+                      width={282}
+                      objectFit={"contain"}
+                      src={game.chanceFirepot1}
+                      alt="#"
+                    />
+                  </Box>
+                  {/* <Stack pt={10} align={"center"}>
+                    <Text
+                      color={"gray.500"}
+                      fontSize={"sm"}
+                      textTransform={"uppercase"}
+                    >
+                      GAME
+                    </Text>
+                    <Heading
+                      fontSize={"xl"}
+                      fontFamily={"body"}
+                      fontWeight={"semibold"}
+                      textAlign={"center"}
+                      textColor={"black"}
+                    >
+                      {game.title}
+                    </Heading>
+                  </Stack> */}
                 </Box>
-                {/* <Stack pt={10} align={"center"}>
-                  <Text
-                    color={"gray.500"}
-                    fontSize={"sm"}
-                    textTransform={"uppercase"}
-                  >
-                    GAME
-                  </Text>
-                  <Heading
-                    fontSize={"xl"}
-                    fontFamily={"body"}
-                    fontWeight={"semibold"}
-                    textAlign={"center"}
-                    textColor={"black"}
-                  >
-                    {game.title}
-                  </Heading>
-                </Stack> */}
-              </Box>
-            </Center>
+              </Center>
+            </Show>
           </GridItem>
         ))}
       </Grid>

@@ -68,7 +68,7 @@ const SignUp = (props: { onCloseModal: () => void }) => {
                     title: "Signup failed!",
                     toast: toast,
                   });
-              
+
                   setIsLoading(false);
                 }
               }

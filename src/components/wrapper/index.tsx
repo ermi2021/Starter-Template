@@ -15,8 +15,6 @@ import {
   HStack,
   Show,
   Spacer,
-  Hide,
-  Input,
   Stack,
   Button,
   Text,
@@ -37,7 +35,7 @@ const Wrap = ({ children }: any) => {
   const closeModal = () => {
     onClose();
   };
- 
+
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -129,10 +127,9 @@ const Wrap = ({ children }: any) => {
                   Logo
                 </Text>
               </Show>
-        
 
               <Spacer />
-              <Hide breakpoint="(max-width: 767px)">
+              {/* <Hide breakpoint="(max-width: 767px)">
                 <Input
                   placeholder="Search"
                   m={5}
@@ -141,7 +138,7 @@ const Wrap = ({ children }: any) => {
                   borderColor={"gray.300"}
                   focusBorderColor={"gray.400"}
                 />
-              </Hide>
+              </Hide> */}
 
               {token === null || token === undefined ? ( // Check if token exists in local storage
                 <Stack spacing={4} direction="row" align="center">
@@ -187,7 +184,13 @@ const Wrap = ({ children }: any) => {
           >
             {children}
           </GridItem>
-          <GridItem area={"footer"} position={"sticky"} zIndex={2} bottom={"0"}>
+          <GridItem
+            area={"footer"}
+            position={"fixed"}
+            width="100%"
+            zIndex={2}
+            bottom={"0"}
+          >
             <Show breakpoint="(max-width: 767px)">
               <MobileNav onOpen={onOpen} />
             </Show>

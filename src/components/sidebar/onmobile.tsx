@@ -42,14 +42,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <Hide below="md">
-          <ModalOverlay />
-        </Hide>
-        <ModalContent>
-          <ModalHeader>Sign in required</ModalHeader>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+
+        <ModalContent margin={3} padding={2}>
+          <ModalHeader textAlign={"center"}>Sign in required</ModalHeader>
           <ModalCloseButton />
-          <ModalBody fontWeight={"semibold"} mb={5}>
+          <ModalBody textAlign={"center"} fontWeight={"semibold"} mb={5}>
             Please sign in to go to your account page
           </ModalBody>
         </ModalContent>
@@ -63,12 +62,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               navigate(menu.route);
             }
           }}
+          width="60%"
         >
-          <BottomNavigationIcon as={menu.icon} color={"white"} />
+          <BottomNavigationIcon boxSize={4} as={menu.icon} color={"white"} />
           <BottomNavigationLabel
             fontSize={"xs"}
             color={"white"}
-            fontWeight={"bold"}
+            // fontWeight={"bold"}
           >
             {menu.name}
           </BottomNavigationLabel>
