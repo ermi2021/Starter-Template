@@ -25,13 +25,12 @@ import { useNavigate } from "react-router";
 
 const Game = ({ games }: { games: GameProp[] }) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const [accountCheck, setAccountCheck] = useState(false);
-  const { onClose } = useDisclosure();
+  const { isOpen,onClose } = useDisclosure();
 
   return (
     <Box>
-      <Modal isCentered isOpen={loading} onClose={onClose}>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <Hide below="md">
           <ModalOverlay
             bg="blackAlpha.300"
