@@ -60,7 +60,13 @@ export default function Profile() {
       </Modal>
 
       <Stack
-        direction="row"
+        direction={{
+          base: "column",
+          md: "row",
+          sm: "row",
+          lg: "row",
+          xl: "row",
+        }}
         my={3}
         spacing={4}
         justify="space-between"
@@ -72,7 +78,7 @@ export default function Profile() {
           fontWeight={"bold"}
           fontSize={"2xl"}
           color={"black"}
-          my={4}
+          // my={4}
           textAlign={"center"}
         >
           Account Information
@@ -85,6 +91,12 @@ export default function Profile() {
               setWithdraw(false);
               onOpen();
             }}
+            _hover={{
+              bg: "transparent",
+              border: "1px",
+              borderColor: "green.400",
+              color: "green.400",
+            }}
           >
             Deposit
           </Button>
@@ -95,12 +107,21 @@ export default function Profile() {
               setWithdraw(true);
               onOpen();
             }}
+            _hover={{
+              bg: "transparent",
+              border: "1px",
+              borderColor: "red.400",
+              color: "red.400",
+            }}
           >
             Withdraw
           </Button>
         </Stack>
       </Stack>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+      <SimpleGrid
+        columns={{ base: 1, sm: 1, md: 1, lg: 3, xl: 3 }}
+        spacing={{ base: 5, lg: 6 }}
+      >
         <StatsCard
           title={"Balance"}
           stat={userInformation?.balance + " " + userInformation?.currency}
