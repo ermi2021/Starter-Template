@@ -21,6 +21,10 @@ import TabletBanner from "../../../components/tabbanner";
 const Home = () => {
   const [games, setGames] = useState<GameProp[]>([]);
   const [loading, setLoading] = useState(false);
+  const handleTabChange = (selectedTab: string): void => {
+    // Do something with the selected tab
+    console.log('Selected tab:', selectedTab);
+  };
 
   const getGames = async () => {
     setLoading(true);
@@ -54,7 +58,7 @@ const Home = () => {
                   `}
       minH="100%"
       w={"100%"}
-      gap={4}
+      gap={2}
     >
       <GridItem overflow={"hidden"} area={"banner"}>
         <Show breakpoint="(min-width: 480px) and (max-width: 991px)">
@@ -62,10 +66,10 @@ const Home = () => {
         </Show>
 
         <Hide above="sm">
-          <MobileAdvertBanner />
+          <MobileAdvertBanner onTabChange={handleTabChange}/>
         </Hide>
         <Show breakpoint="(min-width: 992px)">
-          <AdvertBanner />
+          <AdvertBanner onTabChange={handleTabChange}/>
         </Show>
         <Spacer />
 

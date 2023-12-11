@@ -1,124 +1,41 @@
+/* eslint-disable react/jsx-no-undef */
 import {
-  Box,
-  Image,
-  List,
-  ListItem,
-  Button,
-  SimpleGrid,
-  VStack,
+  Tab,
+  TabList,
+  Tabs,
 } from "@chakra-ui/react";
-import { Carousel } from "react-responsive-carousel";
-import { images2 } from "../../../src/utils/data/caresoulimages/index";
+import { Categories } from "../../../src/utils/data/caresoulimages/index";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useState } from "react";
 
-const MobileAdvertBanner = () => {
+const MobileAdvertBanner = ({ onTabChange }: { onTabChange: (selectedTab: string) => void;}) => {
+  const [_selectedTab, setSelectedTab] = useState(Categories[0]); // Set the default selected tab
+
+  const handleTabChange = (tab:string) => {
+    setSelectedTab(tab);
+    onTabChange(tab); // Pass the selected tab to the parent
+  };
   return (
-    <Carousel
-      showIndicators={false}
-      showThumbs={false}
-      autoPlay={false}
-      infiniteLoop={false}
-      showStatus={false}
-    >
-      <Box height={"fit"} bg={"teal.500"} paddingY={5}>
-        <List margin={"auto"} width={"90%"}>
-          <SimpleGrid columns={{ base: 3 }}>
-            {images2.map((image: any) => (
-              <ListItem paddingY="15px">
-                <VStack>
-                  <Image
-                    boxSize="70px"
-                    borderRadius={10}
-                    objectFit="contain"
-                    src={image}
-                  />
-
-                  <Button
-                    height={"5"}
-                    fontSize="sm"
-                    color={"white"}
-                    fontWeight={"light"}
-                    variant="unstyled"
-                    textDecoration="none"
-                    whiteSpace="normal"
-                    textAlign="center"
-                    wordBreak={"break-word"}
-                  >
-                    Category
-                  </Button>
-                </VStack>
-              </ListItem>
-            ))}
-          </SimpleGrid>
-        </List>
-      </Box>
-
-      <Box height={"fit"} bg={"teal.500"} paddingY={5}>
-        <List margin={"auto"} width={"90%"}>
-          <SimpleGrid columns={{ base: 3 }}>
-            {images2.map((image: any) => (
-              <ListItem paddingY="15px">
-                <VStack>
-                  <Image
-                    boxSize="70px"
-                    borderRadius={10}
-                    objectFit="contain"
-                    src={image}
-                  />
-
-                  <Button
-                    height={"5"}
-                    fontSize="sm"
-                    color={"white"}
-                    fontWeight={"light"}
-                    variant="unstyled"
-                    textDecoration="none"
-                    whiteSpace="normal"
-                    textAlign="center"
-                    wordBreak={"break-word"}
-                  >
-                    Category
-                  </Button>
-                </VStack>
-              </ListItem>
-            ))}
-          </SimpleGrid>
-        </List>
-      </Box>
-
-      <Box height={"fit"} bg={"teal.500"} paddingY={5}>
-        <List margin={"auto"} width={"90%"}>
-          <SimpleGrid columns={{ base: 3 }}>
-            {images2.map((image: any) => (
-              <ListItem paddingY="15px">
-                <VStack>
-                  <Image
-                    boxSize="70px"
-                    borderRadius={10}
-                    objectFit="contain"
-                    src={image}
-                  />
-
-                  <Button
-                    height={"5"}
-                    fontSize="sm"
-                    color={"white"}
-                    fontWeight={"light"}
-                    variant="unstyled"
-                    textDecoration="none"
-                    whiteSpace="normal"
-                    textAlign="center"
-                    wordBreak={"break-word"}
-                  >
-                    Category
-                  </Button>
-                </VStack>
-              </ListItem>
-            ))}
-          </SimpleGrid>
-        </List>
-      </Box>
-    </Carousel>
+    <>
+  
+    <Tabs size={'sm'} overflowX={'scroll'} variant="unstyled" colorScheme="green">
+      <TabList>
+        {Categories.map((category) => (
+          <Tab   key={category}
+          rounded={'md'}
+          shadow={'sm'}
+          fontSize={'10px'}
+          fontWeight={'medium'}
+          bg={'gray.300'}
+          ml={2}
+          mb={2}
+          width={'300px'}
+          _selected={{ color: 'white', bg: 'teal.500' }} // Style for the selected tab
+          onClick={() => handleTabChange(category)}>{category}</Tab>
+        ))}
+      </TabList>
+    </Tabs>
+    </>
   );
 };
 
