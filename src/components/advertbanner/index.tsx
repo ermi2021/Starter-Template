@@ -4,16 +4,12 @@ import { Categories } from "../../../src/utils/data/caresoulimages/index";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useState } from "react";
 
-const AdvertBanner = ({
-  onTabChange,
-}: {
-  onTabChange: (selectedTab: string) => void;
-}) => {
-  const [_selectedTab, setSelectedTab] = useState(Categories[0]); // Set the default selected tab
+const AdvertBanner = ({ onTabChange }: { onTabChange: (selectedTab: string, selected: string) => void;}) => {
+  const [selectedTab, setSelectedTab] = useState(Categories[0]); // Set the default selected tab
 
-  const handleTabChange = (tab: string) => {
+  const handleTabChange = (tab: string,selectedTab:string) => {
     setSelectedTab(tab);
-    onTabChange(tab); // Pass the selected tab to the parent
+    onTabChange(tab,selectedTab); // Pass the selected tab to the parent
   };
   return (
     <>
@@ -36,7 +32,7 @@ const AdvertBanner = ({
               mb={2}
               width={"300px"}
               _selected={{ color: "white", bg: "teal.500" }} // Style for the selected tab
-              onClick={() => handleTabChange(category)}
+              onClick={() => handleTabChange(category,selectedTab)}
             >
               {category}
             </Tab>

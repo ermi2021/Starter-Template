@@ -21,9 +21,9 @@ import TabletBanner from "../../../components/tabbanner";
 const Home = () => {
   const [games, setGames] = useState<GameProp[]>([]);
   const [loading, setLoading] = useState(false);
-  const handleTabChange = (selectedTab: string): void => {
+  const handleTabChange = (selectedTab: string, selected: string): void => {
     // Do something with the selected tab
-    console.log('Selected tab:', selectedTab);
+    console.log('Selected tab:', selectedTab, selected);
   };
 
   const getGames = async () => {
