@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getGameUrl } from "../../../services/gameService";
 import { useParams } from "react-router-dom";
-import { Spinner } from "@chakra-ui/react";
+import { Center, Spinner } from "@chakra-ui/react";
 
 const GamePlay = () => {
   const { name } = useParams();
@@ -30,6 +30,7 @@ const GamePlay = () => {
   return (
     <>
     {loading ? (
+      <Center mt={40}>
          <Spinner
          thickness='4px'
          speed='0.65s'
@@ -37,6 +38,7 @@ const GamePlay = () => {
          color='blue.500'
          size='xl'
        />
+       </Center>
     ): (
       <div style={{ height: "100vh" }}>
       {url && (
