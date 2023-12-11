@@ -62,7 +62,7 @@ const Home = () => {
     >
       <GridItem overflow={"hidden"} area={"banner"}>
         <Show breakpoint="(min-width: 480px) and (max-width: 991px)">
-          <TabletBanner />
+          <TabletBanner onTabChange={handleTabChange}/>
         </Show>
 
         <Hide above="sm">
