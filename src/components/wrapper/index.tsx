@@ -105,7 +105,7 @@ const Wrap = ({ children }: any) => {
           minH={"100vh"}
           color="blackAlpha.700"
           fontWeight="bold"
-          rowGap={5}
+          rowGap={2}
         >
           {/* <Hide below="md"> */}
           <GridItem
@@ -174,7 +174,7 @@ const Wrap = ({ children }: any) => {
           {/* </Hide> */}
 
           <GridItem
-            px="5"
+            px="2"
             area={"main"}
             marginTop={{
               base: "5",

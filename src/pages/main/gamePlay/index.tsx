@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import { getGameUrl } from "../../../services/gameService";
 import { useParams } from "react-router-dom";
+import { Spinner } from "@chakra-ui/react";
 
 const GamePlay = () => {
   const { name } = useParams();
   const [url, setURL] = useState("");
+  const [loading, setLoading] =useState(false);
   async function getGameURL() {
     console.log(name);
 
@@ -17,11 +19,26 @@ const GamePlay = () => {
     }
   }
   useEffect(() => {
-    getGameURL();
+    setLoading(true);
+    getGameURL().then((res)=>{
+      setLoading(false);
+    }).catch((err)=>{
+      setLoading(false);
+    });
   }, []);
 
   return (
-    <div style={{ height: "100vh" }}>
+    <>
+    {loading ? (
+         <Spinner
+         thickness='4px'
+         speed='0.65s'
+         emptyColor='gray.200'
+         color='blue.500'
+         size='xl'
+       />
+    ): (
+      <div style={{ height: "100vh" }}>
       {url && (
         <iframe
           src={url}
@@ -30,6 +47,9 @@ const GamePlay = () => {
         />
       )}
     </div>
+    )}
+  
+    </>
   );
 };
 
