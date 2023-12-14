@@ -19,3 +19,19 @@ export const accountService = async () => {
     return []; // Return an empty array or handle the error case based on your application logic
   }
 };
+
+export const topUpAmount = async (pincode: string) => {
+  try {
+    const response = await axiosInstance.post(`${API_BASE_URL}/topup`, { pincode });
+
+    if (response) {
+      console.log("Successful top-up response", response);
+      return true; // Assuming the data is in the response's data property
+    } else {
+      console.error("Error response", response);
+      return false; // Return an empty array or handle the error case based on your application logic
+    }
+  } catch (error) {
+    console.error("Error in topUpAmount", error);
+  }
+}
