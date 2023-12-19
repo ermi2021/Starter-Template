@@ -22,7 +22,7 @@ export const accountService = async () => {
 
 export const topUpAmount = async (pincode: string) => {
   try {
-    const response = await axiosInstance.post(`${API_BASE_URL}/topup`, { pincode });
+    const response = await axiosInstance.post(`${API_BASE_URL}/pincodes/check`, { pincode, key: localStorage.getItem('key') });
 
     if (response) {
       console.log("Successful top-up response", response);
