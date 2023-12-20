@@ -16,14 +16,19 @@ import { useEffect, useState } from "react";
 import { gameService } from "../../../services/gamesService";
 import { GameProp } from "../../../props/game";
 import Game from "../../../components/game";
-import MobileAdvertBanner from "../../../components/mobileadvertbanner";
-import TabletBanner from "../../../components/tabbanner";
+import GamesTab from "../../../components/tabs";
+import { CategoryProp } from "../../../props/category";
+import { searchGameService } from "../../../services/searchService";
 const Home = () => {
   const [games, setGames] = useState<GameProp[]>([]);
+
   const [loading, setLoading] = useState(false);
-  const handleTabChange = (selectedTab: string, selected: string): void => {
+  const handleTabChange = (
+    selectedTab: CategoryProp,
+    selected: CategoryProp
+  ): void => {
     // Do something with the selected tab
-    console.log('Selected tab:', selectedTab, selected);
+    console.log("Selected tab:", selectedTab, selected);
   };
 
   const getGames = async () => {
@@ -47,6 +52,19 @@ const Home = () => {
     }
   };
 
+  const searchGame = async (searchTerm: string) => {
+   setLoading(true);
+    try {
+      const res = await searchGameService(searchTerm);
+      setGames(res as unknown as GameProp[]);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     getGames();
   }, []);
@@ -62,14 +80,14 @@ const Home = () => {
     >
       <GridItem overflow={"hidden"} area={"banner"}>
         <Show breakpoint="(min-width: 480px) and (max-width: 991px)">
-          <TabletBanner onTabChange={handleTabChange}/>
+          <AdvertBanner onTabChange={handleTabChange} />
         </Show>
 
         <Hide above="sm">
-          <MobileAdvertBanner onTabChange={handleTabChange}/>
+          <AdvertBanner onTabChange={handleTabChange} />
         </Hide>
         <Show breakpoint="(min-width: 992px)">
-          <AdvertBanner onTabChange={handleTabChange}/>
+          <AdvertBanner onTabChange={handleTabChange} />
         </Show>
         <Spacer />
 
@@ -95,6 +113,12 @@ const Home = () => {
             border={"1px"}
             borderColor={"gray.300"}
             focusBorderColor={"gray.400"}
+            onChange={(val) => {
+              if(val.target.value.length >= 3) {
+                searchGame(val.target.value);
+              }
+            
+            }}
           />
         </InputGroup>
         {/* </Box> */}
@@ -111,6 +135,7 @@ const Home = () => {
         />
       ) : (
         <GridItem area={"main"}>
+          <GamesTab />
           <Game games={games} />
         </GridItem>
       )}

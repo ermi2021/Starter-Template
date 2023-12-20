@@ -5,6 +5,7 @@ import { useEffect, useState} from "react";
 import { GameProp } from "../../../props/game";
 import { gameService } from "../../../services/gamesService";
 import Game from "../../../components/game";
+import GamesTab from "../../../components/tabs";
 
 const Games = () => {
   const [games, setGames] = useState<GameProp[]>([]);
@@ -51,7 +52,10 @@ const Games = () => {
         />
         </Center>
       ) : (
+        <>
+        <GamesTab/>
         <Game games={games}/>
+        </>
       )}
    </>
   );

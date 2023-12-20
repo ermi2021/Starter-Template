@@ -17,11 +17,11 @@ const MobileAdvertBanner = ({ onTabChange }: { onTabChange: (selectedTab: string
   };
   return (
     <>
-  
     <Tabs size={'sm'} overflowX={'scroll'} variant="unstyled" colorScheme="green">
       <TabList>
         {Categories.map((category) => (
-          <Tab   key={category}
+          <Tab   
+          key={category}
           rounded={'md'}
           shadow={'sm'}
           fontSize={'10px'}
