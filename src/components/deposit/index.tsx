@@ -6,16 +6,23 @@ import {
   Input,
   Text,
   Stack,
+  useToast
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
+import { topUpAmount } from "../../services/accountService";
+import SuccessToast from "../toast/successtoast";
+import ErrorToast from "../toast/errortoast";
+
 
 const Deposit = (props: { onCloseModal: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const DepositSchema = yup.object().shape({
     depositamount: yup.string().required(),
   });
+  const toast = useToast();
+
   const formik = useFormik({
     initialValues: {
       depositamount: "",
@@ -23,8 +30,30 @@ const Deposit = (props: { onCloseModal: () => void }) => {
     validationSchema: DepositSchema,
     onSubmit: (values) => {
       setIsLoading(true);
+      topUpAmount(values.depositamount).then ((res) => {
+        if (res) {
+          SuccessToast({
+            message: "Deposited successfully",
+            title: "Deposit",
+            toast: toast,
+          });
+          setIsLoading(false);
+          setTimeout(() => {
+            setIsLoading(false);
+            props.onCloseModal();
+          }, 3000);
+        } else {
+          ErrorToast({
+            message: "Incorrect pin code",
+            title: "Deposit failed.",
+            toast: toast,
+          });
+
+          setIsLoading(false);
+          props.onCloseModal();
+        }
+      });
       setTimeout(() => {
-        setIsLoading(false);
         props.onCloseModal();
       }, 2000);
     },
@@ -56,7 +85,7 @@ const Deposit = (props: { onCloseModal: () => void }) => {
           focusBorderColor="gray.300"
           borderColor={"gray.400"}
           name="username"
-          placeholder="Deposit amount:"
+          placeholder="Pin code:"
           size="md"
           onChange={formik.handleChange("depositamount")}
         />
